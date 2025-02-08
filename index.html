@@ -60,18 +60,21 @@
      Our Scripts
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-     <!-- Script Item 1 -->
+     <!-- Fly gui -->
      <div class="bg-white p-6 rounded-lg shadow-lg">
       <div class="w-full h-40 flex items-center justify-center bg-gray-200 mb-4 rounded text-2xl font-bold text-gray-700">
        Fly Script
       </div>
       <h3 class="text-xl font-bold mb-2">
-       Exploit Script 1
+       Fly gui
       </h3>
       <p class="text-gray-700 mb-4">
-       Description of Exploit Script 1. This script helps you to exploit vulnerabilities in web applications.
+       Allows you to fly
       </p>
-      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="copyToClipboard('here is the script')">
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="copyToClipboard('--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()')">
        Copy Script
       </button>
      </div>
@@ -81,12 +84,123 @@
        ESP
       </div>
       <h3 class="text-xl font-bold mb-2">
-       Exploit Script 2
+       Shows Outlines of every player can also be seen through walls. 
       </h3>
       <p class="text-gray-700 mb-4">
-       Description of Exploit Script 2. This script helps you to exploit vulnerabilities in network protocols.
+       Very useful for fighting games or mazes
       </p>
-      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="copyToClipboard('here is the script')">
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="copyToClipboard('--Universal ESP Script 
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Universal ESP", HidePremium = true, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Tab = Window:MakeTab({
+	Name = "ESP",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+OrionLib:MakeNotification({
+	Name = "Info!",
+	Content = "Esp was made by Dark_Hero using Highlight",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+getgenv().esp = false
+getgenv().teamcheck = false
+getgenv().Color = Color3.fromRGB(255, 0, 0)
+Tab:AddToggle({
+	Name = "ESP",
+	Default = false,
+	Callback = function(Value)
+		getgenv().esp = Value
+		spawn(function()
+		while wait() do
+		    if not getgenv().esp then
+		          for i,v in pairs(game.Players:GetChildren()) do
+		              if v.Character and v.Character:FindFirstChild("Highlight") then
+		                  local Highlight = v.Character:FindFirstChild("Highlight")
+		                  Highlight.Enabled = false
+    		      end
+		      end 
+		      else
+		          for i,v in pairs(game.Players:GetChildren()) do
+		             if getgenv().teamcheck == true then
+		               if v.Character and v ~= game.Players.LocalPlayer and v.TeamColor ~= game.Players.LocalPlayer.TeamColor then
+    		                 if v.Character:FindFirstChild("Highlight") then
+    		                 local Highlight = v.Character:FindFirstChild("Highlight") 
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		                 else
+    		                 local Highlight = Instance.new("Highlight",v.Character)
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		              end       
+    		           end  
+		                if v.TeamColor == game.Players.LocalPlayer.TeamColor then
+    		              if v.Character and v.Character:FindFirstChild("Highlight") then
+    		                  local Highlight = v.Character:FindFirstChild("Highlight")
+        		              Highlight.Enabled = false
+        		          end    
+    		            end 
+    		          else
+    		              if v.Character and v ~= game.Players.LocalPlayer then
+    		                 if v.Character:FindFirstChild("Highlight") then
+    		                 local Highlight = v.Character:FindFirstChild("Highlight") 
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		                 else
+    		                 local Highlight = Instance.new("Highlight",v.Character)
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		              end       
+    		           end    
+		            end       
+		      end    
+		    end  
+		end    
+		end)
+	end    
+})
+Tab:AddColorpicker({
+	Name = "Esp Color",
+	Default = Color3.fromRGB(255, 0, 0),
+	Callback = function(Value)
+		getgenv().Color = Value
+	end	  
+})
+Tab:AddToggle({
+	Name = "Teamcheck",
+	Default = false,
+	Callback = function(Value)
+		getgenv().teamcheck = Value
+	end    
+})
+Tab:AddToggle({
+	Name = "Rainbow ESP",
+	Default = false,
+	Callback = function(Value)
+		getgenv().Rainbow = Value
+		while wait() do
+		    if not getgenv().Rainbow then return end
+		    getgenv().Color = Color3.new(148, 0, 211)
+		    wait()
+		    getgenv().Color = Color3.new(75, 0, 130)
+		    wait()
+		    getgenv().Color = Color3.new(0, 0, 255)
+		    wait()
+		    getgenv().Color = Color3.new(0, 255, 0)
+		    wait()
+		    getgenv().Color = Color3.new(255, 255, 0)
+		    wait()
+		    getgenv().Color = Color3.new(255, 127, 0)
+		    wait()
+		    getgenv().Color = Color3.new(255, 0 , 0)
+		    wait()
+		end    
+	end    
+})')">
        Copy Script
       </button>
      </div>
