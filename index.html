@@ -1,60 +1,37 @@
-<html>
- <head>
-  <title>
-   Discord Server
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
- </head>
- <body class="bg-gray-100 font-roboto">
-  <header class="bg-blue-600 text-white p-4">
-   <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-2xl font-bold">
-     My Discord Server
-    </h1>
-    <nav>
-     <ul class="flex space-x-4">
-      <li>
-       <a class="hover:underline" href="#">
-        Home
-       </a>
-      </li>
-      <li>
-       <a class="hover:underline" href="#">
-        About
-       </a>
-      </li>
-      <li>
-       <a class="hover:underline" href="#">
-        Contact
-       </a>
-      </li>
-     </ul>
-    </nav>
-   </div>
-  </header>
-  <main class="container mx-auto mt-10 p-4">
-   <section class="text-center">
-    <h2 class="text-4xl font-bold mb-4">
-     Welcome!
-    </h2>
-    <img alt="A shadowy wolf with glowing red and purple eyes emerging from darkness. The wolf is surrounded by a dark mist giving it a ghostly and cursed effect." class="mx-auto mb-6" src="https://media-hosting.imagekit.io//48f520c2f6364419/DALLE_2025-02-16_02.18.26_-_A_shadowy_wolf_with_glowing_red_and_purple_eyes_emerging_from_darkness._The_wolf_is_surrounded_by_a_dark_mist_giving_it_a_ghostly_and_cursed_effect.png?Expires=1834431887&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=nqQqsPb04JxDLh1NV8ocsFwmeKBW~z3rUbf0z7x637-WLOgDzcxulJ~gCbRtuFMF~vO-Lxjg-mC-hC76D5tndoEc~wObIyyEA2wAy-LoMLa0A2cJgZBQ0aQ6TD6eIaut-MairadhGS4m88opBcbuAguW8~ATyCTCrONMV31MssHI2Mt8zE25W7uL9SuQkQUgVviKuw1rYOHcU42xO~XCBaDj5IJsrNutLY6rRb64sblU3cR~aV1TkndcJ5Tc9aJU2DK954ewjUSahIVTfVQQeWDjtWlt-AQuO0DMs7EML1FI921Orn-Uo3x7t7a3nzvegZoez1qxVEE20~ydXbIw4w__"/>
-    <p class="text-lg mb-6">
-     Join CV-Cursed Veilwalkers 10k+ level only
-    </p>
-    <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" href="https://discord.gg/Z2dRtTRv6x" target="_blank" rel="noopener noreferrer">
-     Join Now
-    </a>
-   </section>
-  </main>
-  <footer class="bg-gray-800 text-white p-4 mt-10">
-   <div class="container mx-auto text-center">
-    <p>
-     © 2025 made by rayx404. All rights reserved.
-    </p>
-   </div>
-  </footer>
- </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Pictures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20%;
+        }
+        #clickText {
+            font-size: 24px;
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="clickText" onclick="getIP()">Click here to see cat pictures</p>
+
+    <script>
+        function getIP() {
+            fetch('https://api64.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("clickText").textContent = "Your IP: " + data.ip;
+            })
+            .catch(error => console.error('Error fetching IP:', error));
+        }
+    </script>
+
+</body>
 </html>
