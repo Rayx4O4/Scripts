@@ -3,35 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat Pictures</title>
+    <title>Dino Game</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 20%;
+            font-family: Arial, sans-serif;
         }
-        #clickText {
-            font-size: 24px;
-            cursor: pointer;
-            color: blue;
-            text-decoration: underline;
+        canvas {
+            background-color: #f7f7f7;
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-
-    <p id="clickText" onclick="getIP()">Click here to see cat pictures</p>
+    <h1>Dino Game</h1>
+    <p>Press Space or Up Arrow to Jump</p>
+    <canvas id="gameCanvas" width="800" height="200"></canvas>
 
     <script>
-        function getIP() {
-            fetch('https://api64.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("clickText").textContent = "Your IP: " + data.ip;
-            })
-            .catch(error => console.error('Error fetching IP:', error));
-        }
-    </script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
 
+        // Load images
+        const dinoImg = new Image();
+        dinoImg.src = "https://i.imgur.com/RSqF7hB.png";  // Replace with a better dino image
+
+        const cactusImg = new Image();
+        cactusImg.src = "https://i.imgur.com/0yKxK5z.png";  // Replace with a better obstacle image
+
+        let dino = { x: 50, y: 150, width: 40, height: 40, dy: 0, gravity: 0.6, jumpPower: -10, onGround: true };
+        let obstacles = [];
+        let gameSpeed = 3;
+        let score = 0;
+        let isGameOver = false;
+
+        function drawDino() {
+            ctx.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+        }
+
+        function updateDino() {
+            dino.y += dino.dy;
+            dino.dy += dino.gravity;
+
+            if (dino.y >= 150) {
+                dino.y = 150;
+                dino.dy = 0;
+                dino.onGround = true;
+            }
+        }
+
+        function spawnObstacle() {
+            let size = Math.random() * 20 + 20;
+            obstacles.push({ x: canvas.width, y: 160 - size, width: size, height: size });
+        }
+
+        function updateObstacles() {
+            for (let i = 0; i < obstacles.length; i++) {
+                obstacles[i].x -= gameSpeed;
+
+                if (obstacles[i].x + obstacles[i].width < 0) {
+                    obstacles.splice(i, 1);
+                    score++;
+                }
+
+                if (
+                    dino.x < obstacles[i].x + obstacles[i].width &&
+                    dino.x + dino.width > obstacles[i].x &&
+                    dino.y < obstacles[i].y + obstacles[i].height &&
+                    dino.y + dino.height > obstacles[i].y
+                ) {
+                    isGameOver = true;
+                }
+            }
+        }
+
+        function drawObstacles() {
+            for (let obs of obstacles) {
+                ctx.drawImage(cactusImg, obs.x, obs.y, obs.width, obs.height);
+            }
+        }
+
+        function gameLoop() {
+            if (isGameOver) {
+                ctx.fillStyle = "black";
+                ctx.font = "30px Arial";
+                ctx.fillText("Game Over", canvas.width / 2 - 70, canvas.height / 2);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawDino();
+            updateDino();
+
+            drawObstacles();
+            updateObstacles();
+
+            ctx.fillStyle = "black";
+            ctx.fillText(`Score: ${score}`, 10, 20);
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        document.addEventListener("keydown", function (e) {
+            if ((e.code === "Space" || e.code === "ArrowUp") && dino.onGround) {
+                dino.dy = dino.jumpPower;
+                dino.onGround = false;
+            }
+        });
+
+        setInterval(spawnObstacle, 2000);
+        gameLoop();
+    </script>
 </body>
 </html>
